@@ -1,79 +1,158 @@
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-2e0aaae1b6195c2367325f4f02e2d04e9abb55f0b24a779b69b11b9e10269abc.svg)](https://classroom.github.com/online_ide?assignment_repo_id=19920200&assignment_repo_type=AssignmentRepo)
-# MERN Stack Integration Assignment
 
-This assignment focuses on building a full-stack MERN (MongoDB, Express.js, React.js, Node.js) application that demonstrates seamless integration between front-end and back-end components.
+---
 
-## Assignment Overview
+## 📘   MERN Blog Platform 
 
-You will build a blog application with the following features:
-1. RESTful API with Express.js and MongoDB
-2. React front-end with component architecture
-3. Full CRUD functionality for blog posts
-4. User authentication and authorization
-5. Advanced features like image uploads and comments
+```md
+# 🔄 CivicHub – Fullstack MERN Blog Platform
 
-## Project Structure
+CivicHub is a full-stack blog application built with the MERN stack: **MongoDB**, **Express.js**, **React.js**, and **Node.js**. It features secure authentication, post creation/editing, real-time commenting, image uploads, and an admin dashboard — all optimized for rapid development using **pnpm**.
+
+---
+
+## 🚀 Features
+
+- 🔐 User authentication with protected routes
+- 📝 CRUD operations for blog posts
+- 🗂 Categories and tags for organization
+- 💬 Real-time comments with refresh triggers
+- 🎨 Responsive UI using Tailwind v4 and ShadCN components
+- 🛠 Admin tools with role-based access
+- 📸 Image uploads (Cloudinary/local)
+- 🔍 Pagination and search filtering
+
+---
+
+## 🧰 Tech Stack
+
+| Layer      | Tools                                       |
+|-----------|----------------------------------------------|
+| Frontend   | React + Vite + TailwindCSS + ShadCN UI       |
+| Backend    | Express.js + MongoDB + Mongoose              |
+| Auth       | JWT, cookie-parser, bcrypt, helmet           |
+| Dev Tools  | pnpm, Axios, React Router, custom hooks      |
+
+---
+
+## 📁 Project Structure
 
 ```
-mern-blog/
-├── client/                 # React front-end
-│   ├── public/             # Static files
-│   ├── src/                # React source code
-│   │   ├── components/     # Reusable components
-│   │   ├── pages/          # Page components
-│   │   ├── hooks/          # Custom React hooks
-│   │   ├── services/       # API services
-│   │   ├── context/        # React context providers
-│   │   └── App.jsx         # Main application component
-│   └── package.json        # Client dependencies
-├── server/                 # Express.js back-end
-│   ├── config/             # Configuration files
-│   ├── controllers/        # Route controllers
-│   ├── models/             # Mongoose models
-│   ├── routes/             # API routes
-│   ├── middleware/         # Custom middleware
-│   ├── utils/              # Utility functions
-│   ├── server.js           # Main server file
-│   └── package.json        # Server dependencies
-└── README.md               # Project documentation
+civichub/
+├── client/                  # React + Vite frontend
+│   ├── src/
+│   │   ├── components/      # Reusable components
+│   │   ├── pages/           # Route-based views
+│   │   ├── context/         # Auth, Toast, Theme
+│   │   ├── hooks/           # Custom React hooks
+│   │   ├── layouts/         # Page layout wrappers
+│   │   └── App.jsx          # Main entry point
+│   └── package.json         # Frontend deps (pnpm)
+├── server/                  # Express backend
+│   ├── routes/              # API routes
+│   ├── models/              # Mongoose schemas
+│   ├── middleware/          # Auth, validation
+│   ├── controllers/         # Route logic
+│   ├── server.js            # Server bootstrap
+│   └── package.json         # Backend deps (pnpm)
+└── README.md                # Project documentation
 ```
 
-## Getting Started
+---
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Follow the setup instructions in the `Week4-Assignment.md` file
-4. Complete the tasks outlined in the assignment
+## 🛠️ Setup Instructions
 
-## Files Included
+### 1. Install pnpm globally
 
-- `Week4-Assignment.md`: Detailed assignment instructions
-- Starter code for both client and server:
-  - Basic project structure
-  - Configuration files
-  - Sample models and components
+```bash
+npm install -g pnpm
+```
 
-## Requirements
+### 2. Install dependencies
 
-- Node.js (v18 or higher)
-- MongoDB (local installation or Atlas account)
-- npm or yarn
-- Git
+```bash
+cd client && pnpm install
+cd ../server && pnpm install
+```
 
-## Submission
+### 3. Configure Environment Variables
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+Create `.env` files in both `client` and `server` directories:
 
-1. Complete both the client and server portions of the application
-2. Implement all required API endpoints
-3. Create the necessary React components and hooks
-4. Document your API and setup process in the README.md
-5. Include screenshots of your working application
+```env
+# server/.env
+PORT=5000
+MONGODB_URI=mongodb://localhost:27017/civichub
+JWT_SECRET=your-secret-key
 
-## Resources
+# client/.env
+VITE_API_URL=http://localhost:5000/api
+```
 
-- [MongoDB Documentation](https://docs.mongodb.com/)
-- [Express.js Documentation](https://expressjs.com/)
-- [React Documentation](https://react.dev/)
-- [Node.js Documentation](https://nodejs.org/en/docs/)
-- [Mongoose Documentation](https://mongoosejs.com/docs/) 
+---
+
+## 🧪 Running Locally
+
+```bash
+# Start backend
+cd server
+pnpm dev
+
+# Start frontend
+cd ../client
+pnpm dev
+```
+
+The app runs at [`http://localhost:5173`](http://localhost:5173), with API served from `http://localhost:5000`.
+
+---
+
+## 🔗 Key API Endpoints
+
+| Method | Endpoint             | Description               |
+|--------|----------------------|---------------------------|
+| GET    | /api/posts           | List all blog posts       |
+| POST   | /api/posts           | Create new post           |
+| GET    | /api/posts/:id       | Get single post by ID     |
+| PUT    | /api/posts/:id       | Update post               |
+| DELETE | /api/posts/:id       | Delete post               |
+| GET    | /api/categories      | List all categories       |
+| GET    | /api/comments/:id    | Get comments for post     |
+| POST   | /api/comments        | Add a comment             |
+
+---
+
+## 📌 Development Highlights
+
+- ✅ Modular architecture for long-term scalability
+- ✅ Custom hooks for form state, pagination, modals
+- ✅ Role-based access control
+- ✅ Image and file uploads (dropzone-compatible)
+- ✅ Secure session handling via cookies
+
+---
+
+## 📷 Screenshots
+
+> Include screenshots for:
+> - Homepage
+> - Single post with comments
+> - Admin dashboard
+> - Post editor
+> - Dark mode toggle
+
+---
+
+## 📚 Resources
+
+- [React Docs](https://react.dev/)
+- [Express Docs](https://expressjs.com/)
+- [TailwindCSS Docs](https://tailwindcss.com/)
+- [MongoDB Docs](https://www.mongodb.com/docs/)
+- [pnpm Docs](https://pnpm.io/)
+
+---
+
+## 🛡 License
+
+MIT © 2025 Jim Hope
+```

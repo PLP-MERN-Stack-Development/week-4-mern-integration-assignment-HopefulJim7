@@ -1,4 +1,3 @@
-// Post.js - Mongoose model for blog posts
 
 const mongoose = require('mongoose');
 
@@ -37,7 +36,10 @@ const PostSchema = new mongoose.Schema(
       ref: 'Category',
       required: true,
     },
-    tags: [String],
+    tags: {
+      type: [String],
+      default: [],
+    },
     isPublished: {
       type: Boolean,
       default: false,
@@ -66,17 +68,21 @@ const PostSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// Create slug from title before saving
+// Normalize tags before saving
 PostSchema.pre('save', function (next) {
-  if (!this.isModified('title')) {
-    return next();
+  if (this.tags && this.tags.length > 0) {
+    this.tags = this.tags.map((tag) => tag.toLowerCase().trim());
   }
-  
-  this.slug = this.title
-    .toLowerCase()
-    .replace(/[^\w ]+/g, '')
-    .replace(/ +/g, '-');
-    
+
+  // Generate slug from title with timestamp to avoid collisions
+  if (this.isModified('title')) {
+    const baseSlug = this.title
+      .toLowerCase()
+      .replace(/[^\w ]+/g, '')
+      .replace(/ +/g, '-');
+    this.slug = `${baseSlug}-${Date.now()}`;
+  }
+
   next();
 });
 
@@ -97,4 +103,4 @@ PostSchema.methods.incrementViewCount = function () {
   return this.save();
 };
 
-module.exports = mongoose.model('Post', PostSchema); 
+module.exports = mongoose.model('Post', PostSchema);

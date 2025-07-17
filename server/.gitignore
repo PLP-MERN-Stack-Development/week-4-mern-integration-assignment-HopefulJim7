@@ -1,0 +1,36 @@
+uploads/
+
+.env/
+
+# ⚙️ Node dependencies
+node_modules/
+
+# 🧪 Environment configs
+.env
+.env.local
+.env.*.local
+
+# 🗂 Logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# 📦 Build outputs (if using bundlers)
+dist/
+build/
+.cache/
+
+# 🚫 OS + Editor junk
+.DS_Store
+Thumbs.db
+
+# 💥 IDE settings
+.vscode/
+.idea/
+
+# 💾 Mongo data dumps (optional)
+dump/
+
+# 🔐 Secrets (just in case)
+*.pem
